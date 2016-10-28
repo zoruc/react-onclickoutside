@@ -25,7 +25,10 @@
     if (current.correspondingElement) {
       return current.correspondingElement.classList.contains(ignoreClass);
     }
-    return current.classList.contains(ignoreClass);
+    if(current.classList) {
+      return current.classList.contains(ignoreClass);
+    }
+    return false;
   };
 
   /**
@@ -99,8 +102,8 @@
          * linked to this component's state.
          */
         componentDidMount: function() {
-          // If we are in an environment without a DOM such 
-          // as shallow rendering or snapshots then we exit 
+          // If we are in an environment without a DOM such
+          // as shallow rendering or snapshots then we exit
           // early to prevent any unhandled errors being thrown.
           if (typeof document === 'undefined' || !document.createElement){
             return;
